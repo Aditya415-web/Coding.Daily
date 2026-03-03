@@ -182,6 +182,34 @@ body {
 }
 
 /* ================================================================
+       NOTIFIKASI SUKSES (Efek setelah menyimpan entri)
+    ================================================================ */
+.notif-sukses {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--indigo-gelap);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow-lg), 0 0 0 2px var(--coral);
+    z-index: 10000;
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.notif-sukses.muncul {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ================================================================
        <header> — Bagian kepala halaman
        Berisi: nama aplikasi, tanggal, streak api, statistik global
     ================================================================ */
@@ -389,128 +417,72 @@ body>#app>header aside[aria-label="streak"] .api-wrapper .tidur-icon {
     filter: grayscale(1) opacity(0.3);
 }
 
-/* Animasi goyang per level — diterapkan ke svg via kelas .api-wrapper */
+/* Animasi goyang per level — diubah menjadi SANTUY (float lambat & lembut) */
 body>#app>header aside[aria-label="streak"] .api-wrapper.level-pemula svg {
     filter: drop-shadow(0 0 12px rgba(251, 146, 60, 0.75));
-    animation: svgGoyangPelan 1.6s ease-in-out infinite;
+    animation: svgSantuyPemula 3.5s ease-in-out infinite;
 }
 
 body>#app>header aside[aria-label="streak"] .api-wrapper.level-bronze svg {
     filter: drop-shadow(0 0 16px rgba(205, 127, 50, 0.9)) drop-shadow(0 0 6px rgba(255, 100, 0, 0.5));
-    animation: svgGoyangNormal 1.2s ease-in-out infinite;
+    animation: svgSantuyBronze 4s ease-in-out infinite;
 }
 
 body>#app>header aside[aria-label="streak"] .api-wrapper.level-silver svg {
     filter: drop-shadow(0 0 20px rgba(148, 212, 255, 0.95)) drop-shadow(0 0 8px rgba(200, 240, 255, 0.6));
-    animation: svgGoyangNormal 1s ease-in-out infinite;
+    animation: svgSantuySilver 4.2s ease-in-out infinite;
 }
 
 body>#app>header aside[aria-label="streak"] .api-wrapper.level-gold svg {
     filter: drop-shadow(0 0 24px rgba(255, 215, 0, 1)) drop-shadow(0 0 10px rgba(255, 180, 0, 0.9)) drop-shadow(0 0 3px #fffde7);
-    animation: svgGoyangBesar 0.9s ease-in-out infinite;
+    animation: svgSantuyGold 3.8s ease-in-out infinite;
 }
 
 body>#app>header aside[aria-label="streak"] .api-wrapper.level-epic svg {
     filter: drop-shadow(0 0 26px rgba(196, 107, 255, 1)) drop-shadow(0 0 12px rgba(139, 92, 246, 0.9)) drop-shadow(0 0 5px #ede9fe);
-    animation: svgEpic 0.85s ease-in-out infinite;
+    animation: svgSantuyEpic 4.5s ease-in-out infinite;
 }
 
 body>#app>header aside[aria-label="streak"] .api-wrapper.level-legend svg {
-    animation: svgLegend 0.65s ease-in-out infinite;
+    animation: svgSantuyLegend 3.6s ease-in-out infinite;
 }
 
-@keyframes svgGoyangPelan {
-
-    0%,
-    100% {
-        transform: rotate(-5deg) scale(1);
-    }
-
-    50% {
-        transform: rotate(5deg) scale(1.08);
-    }
+/* KEYFRAMES SANTUY — Gerakan lembut mengambang, rotasi minimal */
+@keyframes svgSantuyPemula {
+    0%, 100% { transform: translateY(0) rotate(-2deg) scale(1); }
+    25% { transform: translateY(-3px) rotate(2deg) scale(1.02); }
+    50% { transform: translateY(2px) rotate(-1deg) scale(1.01); }
+    75% { transform: translateY(-1px) rotate(3deg) scale(1.02); }
 }
-
-@keyframes svgGoyangNormal {
-
-    0%,
-    100% {
-        transform: rotate(-8deg) scale(1);
-    }
-
-    50% {
-        transform: rotate(8deg) scale(1.14);
-    }
+@keyframes svgSantuyBronze {
+    0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+    33% { transform: translateY(-4px) rotate(3deg) scale(1.03); }
+    66% { transform: translateY(2px) rotate(-2deg) scale(1.01); }
 }
-
-@keyframes svgGoyangBesar {
-
-    0%,
-    100% {
-        transform: rotate(-11deg) scale(1);
-    }
-
-    50% {
-        transform: rotate(11deg) scale(1.2);
-    }
+@keyframes svgSantuySilver {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    40% { transform: translateY(-5px) rotate(2deg) scale(1.04); }
+    80% { transform: translateY(3px) rotate(-3deg) scale(1.02); }
 }
-
-@keyframes svgEpic {
-    0% {
-        transform: rotate(-10deg) scale(1);
-        filter: drop-shadow(0 0 26px #c46bff) drop-shadow(0 0 12px #8b5cf6);
-    }
-
-    25% {
-        transform: rotate(0) scale(1.22);
-        filter: drop-shadow(0 0 36px #e070ff) drop-shadow(0 0 18px #b464ff);
-    }
-
-    50% {
-        transform: rotate(10deg) scale(1);
-        filter: drop-shadow(0 0 26px #c46bff) drop-shadow(0 0 12px #8b5cf6);
-    }
-
-    75% {
-        transform: rotate(0) scale(1.16);
-        filter: drop-shadow(0 0 32px #c86eff);
-    }
-
-    100% {
-        transform: rotate(-10deg) scale(1);
-    }
+@keyframes svgSantuyGold {
+    0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+    20% { transform: translateY(-3px) rotate(2deg) scale(1.03); }
+    60% { transform: translateY(4px) rotate(-3deg) scale(1.05); }
+    90% { transform: translateY(-2px) rotate(1deg) scale(1.02); }
 }
-
-@keyframes svgLegend {
-    0% {
-        transform: rotate(-10deg) scale(1);
-        filter: drop-shadow(0 0 28px #ff4444) drop-shadow(0 0 12px #ff8800);
-    }
-
-    20% {
-        transform: rotate(0) scale(1.24);
-        filter: drop-shadow(0 0 36px #ffdd00) drop-shadow(0 0 16px #ff8800);
-    }
-
-    40% {
-        transform: rotate(9deg) scale(1.05);
-        filter: drop-shadow(0 0 28px #44ff88) drop-shadow(0 0 12px #00ffcc);
-    }
-
-    60% {
-        transform: rotate(0) scale(1.18);
-        filter: drop-shadow(0 0 34px #44aaff) drop-shadow(0 0 14px #8844ff);
-    }
-
-    80% {
-        transform: rotate(-9deg) scale(1.05);
-        filter: drop-shadow(0 0 30px #cc44ff) drop-shadow(0 0 12px #ff44aa);
-    }
-
-    100% {
-        transform: rotate(-10deg) scale(1);
-        filter: drop-shadow(0 0 28px #ff4444) drop-shadow(0 0 12px #ff8800);
-    }
+@keyframes svgSantuyEpic {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateY(-5px) rotate(3deg) scale(1.04); }
+    50% { transform: translateY(2px) rotate(-4deg) scale(1.06); }
+    75% { transform: translateY(-3px) rotate(2deg) scale(1.03); }
+}
+@keyframes svgSantuyLegend {
+    0%, 100% { transform: translateY(0) rotate(-1deg) scale(1); }
+    15% { transform: translateY(-4px) rotate(3deg) scale(1.05); }
+    35% { transform: translateY(3px) rotate(-3deg) scale(1.07); }
+    55% { transform: translateY(-2px) rotate(4deg) scale(1.04); }
+    75% { transform: translateY(4px) rotate(-2deg) scale(1.06); }
+    90% { transform: translateY(-3px) rotate(1deg) scale(1.03); }
 }
 
 /* ── Badge Level — nama level di bawah pesan ── */
@@ -1329,29 +1301,6 @@ body>#app>main>section>header::after {
     font-size: 0.65rem;
     font-weight: 700;
     color: var(--indigo);
-}
-
-/* container ikon SVG */
-.kisi-materi>article .ikon-materi {
-    font-size: 2.2rem;
-    line-height: 1;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-}
-/* pakai devicon untuk ikon yang presisi */
-.kisi-materi>article .ikon-materi i {
-    font-size: 2.4rem;
-}
-/* fallback */
-.kisi-materi>article .ikon-materi .devicon {
-    font-size: 2.4rem;
-}
-
-/* di dalam tag log */
-.daftar-log>article .log-kanan .tag-log span i {
-    font-size: 1.1rem;
 }
 
 /* ================================================================

@@ -1331,6 +1331,29 @@ body>#app>main>section>header::after {
     color: var(--indigo);
 }
 
+/* container ikon SVG */
+.kisi-materi>article .ikon-materi {
+    font-size: 2.2rem;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+}
+/* pakai devicon untuk ikon yang presisi */
+.kisi-materi>article .ikon-materi i {
+    font-size: 2.4rem;
+}
+/* fallback */
+.kisi-materi>article .ikon-materi .devicon {
+    font-size: 2.4rem;
+}
+
+/* di dalam tag log */
+.daftar-log>article .log-kanan .tag-log span i {
+    font-size: 1.1rem;
+}
+
 /* ================================================================
        TOMBOL HAPUS — Dipakai di kartu proyek dan log
     ================================================================ */
